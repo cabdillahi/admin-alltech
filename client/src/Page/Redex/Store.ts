@@ -33,6 +33,7 @@ export const store = configureStore({
     // dashboard
     dashboard: GetDashboardSlice.reducer,
   },
+  devTools: false,
 });
 
 // Types for state and dispatch
