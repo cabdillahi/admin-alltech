@@ -16,8 +16,8 @@ dotenv.config();
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
-  "https://alltechcom-backend.vercel.app",
   "https://alltechcomp.com",
+  "https://admin.alltechcomp.com",
 ];
 
 // Configure CORS
