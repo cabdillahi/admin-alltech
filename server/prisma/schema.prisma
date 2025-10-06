@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+model User {
+  Userid         Int              @id @default(autoincrement())
+  name           String
+  email          String           @unique
+  password       String
+  role           UserRole         @default(ADMIN)
+  phone          String?
+  isActive       Boolean          @default(true)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  isdeleted      Boolean          @default(false)
+  isactive       Boolean          @default(true)
+  Product        Product[]
+  Category       Category[]
+  ProductSection ProductSection[]
+}
+
+model Product {
+  Productid          Int              @id @default(autoincrement())
+  name               String           @unique
+  description        String?
+  price              Float
+  oldPrice           Float?
+  condition          Condition        @default(NEW)
+  rating             Float?
+  slug               String?
+  imageUrl           String
+  contactMethod      String?
+  isAvailable        Boolean          @default(true)
+  isdeleted          Boolean          @default(false)
+  isactive           Boolean          @default(true)
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  ProductSection     ProductSection[]
+  User               User?            @relation(fields: [userUserid], references: [Userid])
+  userUserid         Int?
+  Category           Category?        @relation(fields: [categoryCategoryid], references: [Categoryid])
+  categoryCategoryid Int?
+}
+
+model Category {
+  Categoryid  Int       @id @default(autoincrement())
+  name        String
+  description String?
+  isdeleted   Boolean   @default(false)
+  isactive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Product     Product[]
+  User        User?     @relation(fields: [userUserid], references: [Userid])
+  userUserid  Int?
+}
+
+model ProductSection {
+  ProductSectionid Int         @id @default(autoincrement())
+  sectionType      SectionType @default(FEATURED)
+  displayOrder     Int?
+  isdeleted        Boolean     @default(false)
+  isactive         Boolean     @default(true)
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  User             User?       @relation(fields: [userUserid], references: [Userid])
+  userUserid       Int?
+  Product          Product?    @relation(fields: [productProductid], references: [Productid])
+  productProductid Int?
+}
+
+enum Condition {
+  NEW
+  USED
+}
+
+enum SectionType {
+  FEATURED
+  LATEST
+  TRENDING
+}
