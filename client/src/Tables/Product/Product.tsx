@@ -43,21 +43,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-interface Product {
-  Productid: number;
-  name: string;
-  description?: string;
-  price: number;
-  oldPrice?: number;
-  condition: string;
-  rating?: number;
-  imageUrl: string;
-  contactMethod?: string;
-  Category?: { name: string };
-  User?: { name: string };
-  createdAt: string;
-}
-
 const ProductList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
