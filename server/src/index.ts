@@ -17,7 +17,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
   "https://alltechcomp.com",
-  "https://www.alltechcomp.com"
+  "https://www.alltechcomp.com",
   "https://admin.alltechcomp.com",
 ];
 
